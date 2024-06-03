@@ -502,6 +502,14 @@ selects.config_setting_group(
     ],
 )
 
+selects.config_setting_group(
+    name = "boringssl_fips_ppc",
+    match_all = [
+        ":boringssl_fips",
+        "@platforms//cpu:ppc",
+    ],
+)
+
 config_setting(
     name = "zlib_ng",
     constraint_values = [
@@ -543,10 +551,12 @@ config_setting(
 # Alias pointing to the selected version of BoringSSL:
 # - BoringSSL FIPS from @boringssl_fips//:ssl,
 # - non-FIPS BoringSSL from @boringssl//:ssl.
+# - new alias for aws-lc?
 alias(
     name = "boringssl",
     actual = select({
-        "//bazel:boringssl_fips": "@boringssl_fips//:ssl",
+        "//bazel:boringssl_fips_ppc": "@aws_lc//:ssl",
+        "//bazel:boringssl_fips_x86": "@boringssl_fips//:ssl",
         "//conditions:default": "@boringssl//:ssl",
     }),
 )
@@ -554,7 +564,8 @@ alias(
 alias(
     name = "boringcrypto",
     actual = select({
-        "//bazel:boringssl_fips": "@boringssl_fips//:crypto",
+        "//bazel:boringssl_fips_ppc": "@aws_lc//:crypto",
+        "//bazel:boringssl_fips_x86": "@boringssl_fips//:crypto",
         "//conditions:default": "@boringssl//:crypto",
     }),
 )

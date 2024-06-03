@@ -138,6 +138,7 @@ def envoy_dependencies(skip_targets = []):
     # - non-FIPS BoringSSL from @boringssl//:ssl.
     _boringssl()
     _boringssl_fips()
+    _aws_lc()
     native.bind(
         name = "ssl",
         actual = "@envoy//bazel:boringssl",
@@ -270,6 +271,12 @@ def _boringssl_fips():
     external_http_archive(
         name = "boringssl_fips",
         build_file = "@envoy//bazel/external:boringssl_fips.BUILD",
+    )
+
+def _aws_lc():
+    external_http_archive(
+        name = "aws_lc",
+        build_file = "@envoy//bazel/external:aws_lc.BUILD",
     )
 
 def _com_github_openhistogram_libcircllhist():

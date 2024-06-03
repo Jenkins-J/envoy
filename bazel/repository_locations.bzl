@@ -163,6 +163,18 @@ REPOSITORY_LOCATIONS_SPEC = dict(
         release_date = "2022-06-13",
         cpe = "cpe:2.3:a:google:boringssl:*",
     ),
+    aws_lc = dict(
+        project_name = "AWS libcrypto (AWS-LC)",
+        project_desc = "OpenSSL compatible general-purpose crypto library",
+        project_url = "https://github.com/aws/aws-lc",
+        version = "b434043d85c0744a5f82248c4fd0fd20b4a1dae4",
+        sha256 = "7f65236619dc560bfd3b645d7f0ca8ebca72bf1db96b355c84b28df2396a15c0",
+        strip_prefix = "aws-lc-{version}",
+        urls = ["https://github.com/aws/aws-lc/archive/{version}.tar.gz"],
+        use_category = ["controlplane", "dataplane_core"],
+        release_date = "2024-05-15",
+        cpe = "cpe:2.3:a:google:boringssl:*",
+    ),
     aspect_bazel_lib = dict(
         project_name = "Aspect Bazel helpers",
         project_desc = "Base Starlark libraries and basic Bazel rules which are useful for constructing rulesets and BUILD files",

@@ -18,6 +18,8 @@ def _selected_extension_target(target):
 def envoy_all_extensions(denylist = []):
     all_extensions = dicts.add(_required_extensions, EXTENSIONS)
 
+    print("denylist: ", *denylist)
+
     # These extensions can be removed on a site specific basis.
     return {_selected_extension_target(v): True for k, v in all_extensions.items() if k not in denylist}.keys()
 

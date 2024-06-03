@@ -137,9 +137,10 @@ REPOSITORY_LOCATIONS_SPEC = dict(
         project_url = "https://boringssl.googlesource.com/boringssl/+/master/crypto/fipsmodule/FIPS.md",
         # When this is updated to a revision newer than 2022-08-12,
         # CertValidatorUtil::setIgnoreCertificateExpiration can be simplified.
-        version = "fips-20210429",
-        sha256 = "a4d069ccef6f3c7bc0c68de82b91414f05cb817494cd1ab483dcf3368883c7c2",
-        urls = ["https://commondatastorage.googleapis.com/chromium-boringssl-fips/boringssl-853ca1ea1168dff08011e5d42d94609cc0ca2e27.tar.xz"],
+        version = "b434043d85c0744a5f82248c4fd0fd20b4a1dae4",
+        sha256 = "7f65236619dc560bfd3b645d7f0ca8ebca72bf1db96b355c84b28df2396a15c0",
+        strip_prefix = "aws-lc-{version}",
+        urls = ["https://github.com/aws/aws-lc/archive/{version}.tar.gz"],
         use_category = ["controlplane", "dataplane_core"],
         release_date = "2021-04-29",
         cpe = "cpe:2.3:a:google:boringssl:*",

@@ -154,6 +154,7 @@ REPOSITORY_LOCATIONS_SPEC = dict(
         urls = ["https://github.com/aws/aws-lc/archive/{version}.tar.gz"],
         use_category = ["controlplane", "dataplane_core"],
         release_date = "2024-05-15",
+        cpe = "cpe:2.3:a:google:boringssl:*",
     ),
     aspect_bazel_lib = dict(
         project_name = "Aspect Bazel helpers",

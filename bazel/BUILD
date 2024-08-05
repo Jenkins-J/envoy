@@ -489,6 +489,14 @@ selects.config_setting_group(
     ],
 )
 
+selects.config_setting_group(
+    name = "boringssl_fips_ppc",
+    match_all = [
+        ":boringssl_fips",
+        "@platforms//cpu:ppc",
+    ],
+)
+
 config_setting(
     name = "zlib_ng",
     constraint_values = [
@@ -560,14 +568,6 @@ config_setting(
 config_setting(
     name = "linux_ppc",
     values = {"cpu": "ppc"},
-)
-
-selects.config_setting_group(
-    name = "linux_ppc_fips",
-    match_all = [
-        ":disable_http3",
-        ":linux_ppc",
-    ],
 )
 
 config_setting(

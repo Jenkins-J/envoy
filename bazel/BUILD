@@ -562,6 +562,14 @@ config_setting(
     values = {"cpu": "ppc"},
 )
 
+selects.config_setting_group(
+    name = "linux_ppc_fips",
+    match_all = [
+        ":disable_http3",
+        ":linux_ppc",
+    ],
+)
+
 config_setting(
     name = "linux_s390x",
     values = {"cpu": "s390x"},

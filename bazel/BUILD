@@ -542,6 +542,7 @@ config_setting(
 alias(
     name = "boringssl",
     actual = select({
+        "//bazel:boringssl_fips_ppc": "@aws_lc//:ssl",
         "//bazel:boringssl_fips": "@boringssl_fips//:ssl",
         "//conditions:default": "@boringssl//:ssl",
     }),
@@ -550,6 +551,7 @@ alias(
 alias(
     name = "boringcrypto",
     actual = select({
+        "//bazel:boringssl_fips_ppc": "@awz_lc//:crypto",
         "//bazel:boringssl_fips": "@boringssl_fips//:crypto",
         "//conditions:default": "@boringssl//:crypto",
     }),

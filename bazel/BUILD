@@ -543,7 +543,7 @@ alias(
     name = "boringssl",
     actual = select({
         "//bazel:boringssl_fips_ppc": "@aws_lc//:ssl",
-        "//bazel:boringssl_fips": "@boringssl_fips//:ssl",
+        "//bazel:boringssl_fips_x86": "@boringssl_fips//:ssl",
         "//conditions:default": "@boringssl//:ssl",
     }),
 )
@@ -551,8 +551,8 @@ alias(
 alias(
     name = "boringcrypto",
     actual = select({
-        "//bazel:boringssl_fips_ppc": "@awz_lc//:crypto",
-        "//bazel:boringssl_fips": "@boringssl_fips//:crypto",
+        "//bazel:boringssl_fips_ppc": "@aws_lc//:crypto",
+        "//bazel:boringssl_fips_x86": "@boringssl_fips//:crypto",
         "//conditions:default": "@boringssl//:crypto",
     }),
 )

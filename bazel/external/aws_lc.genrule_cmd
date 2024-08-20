@@ -12,12 +12,7 @@ OS=`uname`
 ARCH=`uname -m`
 # This works only on Linux-x86_64 and Linux-aarch64.
 
-if [[ "$ARCH" == "ppc64le" ]]; then
-  echo "This is ppc64le."
-  exit 2
-fi
- 
-if [[ "$OS" != "Linux" || ("$ARCH" != "x86_64" && "$ARCH" != "aarch64") ]]; then
+if [[ "$OS" != "Linux" || ("$ARCH" != "x86_64" && "$ARCH" != "aarch64" && "$ARCH" != "ppc64le") ]]; then
   echo "ERROR: BoringSSL FIPS is currently supported only on Linux-x86_64 and Linux-aarch64."
   echo "*** This is the aws_lc genrule command ***"
   echo "ARCH is $ARCH"
@@ -27,7 +22,7 @@ fi
 
 # Bazel magic.
 # ROOT=$(dirname $(rootpath boringssl/BUILDING.md))/..
-ROOT=./external/boringssl_fips
+ROOT=./external/aws_lc
 pushd "$ROOT"
 
 # Build tools requirements (from section 12.1 of https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4407.pdf):
@@ -44,6 +39,9 @@ VERSION=12.0.0
 if [[ "$ARCH" == "x86_64" ]]; then
   PLATFORM="x86_64-linux-gnu-ubuntu-20.04"
   SHA256=a9ff205eb0b73ca7c86afc6432eed1c2d49133bd0d49e47b15be59bbf0dd292e
+elif [[ "$ARCH" == "ppc64le" ]]; then
+  PLATFORM="powerpc64le-linux-ubuntu-18.04"
+  SHA256=acf6bd491d60d126254dc867b2c64c9f1077a4b3dabc0381c31fd8e72aacc4f2
 else
   PLATFORM="aarch64-linux-gnu"
   SHA256=d05f0b04fb248ce1e7a61fcd2087e6be8bc4b06b2cc348792f383abf414dec48
@@ -66,6 +64,9 @@ VERSION=1.16.5
 if [[ "$ARCH" == "x86_64" ]]; then
   PLATFORM="linux-amd64"
   SHA256=b12c23023b68de22f74c0524f10b753e7b08b1504cb7e417eccebdd3fae49061
+elif [[ "$ARCH" == "ppc64le" ]]; then
+	PLATFORM="linux-ppc64le"
+	SHA256=fad2da6c86ede8448d2d0e66e1776e2f0ae9169714eade29b9ffbbdede7fc6cc
 else
   PLATFORM="linux-arm64"
   SHA256=d5446b46ef6f36fdffa852f73dfbbe78c1ddf010b99fa4964944b9ae8b4d6799
@@ -103,17 +104,27 @@ cd ..
 
 # CMake
 VERSION=3.20.1
-if [[ "$ARCH" == "x86_64" ]]; then
-  PLATFORM="linux-x86_64"
-  SHA256=b8c141bd7a6d335600ab0a8a35e75af79f95b837f736456b5532f4d717f20a09
-else
-  PLATFORM="linux-aarch64"
-  SHA256=5ad1f8139498a1956df369c401658ec787f63c8cb4e9759f2edaa51626a86512
-fi
+if [[ "$ARCH" != "ppc64le" ]]; then
+	if [[ "$ARCH" == "x86_64" ]]; then
+		PLATFORM="linux-x86_64"
+		SHA256=b8c141bd7a6d335600ab0a8a35e75af79f95b837f736456b5532f4d717f20a09
+	else
+		PLATFORM="linux-aarch64"
+		SHA256=5ad1f8139498a1956df369c401658ec787f63c8cb4e9759f2edaa51626a86512
+	fi
 
-curl -sLO https://github.com/Kitware/CMake/releases/download/v"$VERSION"/cmake-"$VERSION"-"$PLATFORM".tar.gz \
-  && echo "$SHA256" cmake-"$VERSION"-"$PLATFORM".tar.gz | sha256sum --check
-tar xf cmake-"$VERSION"-"$PLATFORM".tar.gz
+	curl -sLO https://github.com/Kitware/CMake/releases/download/v"$VERSION"/cmake-"$VERSION"-"$PLATFORM".tar.gz \
+		&& echo "$SHA256" cmake-"$VERSION"-"$PLATFORM".tar.gz | sha256sum --check
+	tar xf cmake-"$VERSION"-"$PLATFORM".tar.gz
+else
+	PLATFORM="linux-ppc64le"
+	echo "Building cmake for ppc64le"
+
+	curl -sL -o cmake-$VERSION-$PLATFORM.tar.gz https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1.tar.gz
+	tar xf cmake-"$VERSION"-"$PLATFORM".tar.gz
+
+	./cmake-"$VERSION"-"$PLATFORM"/bootstrap && make
+fi
 
 export PATH="$PWD/cmake-$VERSION-$PLATFORM/bin:$PATH"
 

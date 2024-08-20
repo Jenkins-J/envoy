@@ -10,10 +10,10 @@ export LDFLAGS=''
 
 OS=`uname`
 ARCH=`uname -m`
-# This works only on Linux-x86_64 and Linux-aarch64.
+# This works only on Linux-x86_64, Linux-ppc64le, and Linux-aarch64.
 
 if [[ "$OS" != "Linux" || ("$ARCH" != "x86_64" && "$ARCH" != "aarch64" && "$ARCH" != "ppc64le") ]]; then
-  echo "ERROR: BoringSSL FIPS is currently supported only on Linux-x86_64 and Linux-aarch64."
+  echo "ERROR: BoringSSL FIPS is currently supported only on Linux-x86_64, Linux-ppc64le, and Linux-aarch64."
   echo "*** This is the aws_lc genrule command ***"
   echo "ARCH is $ARCH"
   exit 1
@@ -22,7 +22,8 @@ fi
 
 # Bazel magic.
 # ROOT=$(dirname $(rootpath boringssl/BUILDING.md))/..
-ROOT=./external/aws_lc
+echo "*** $PWD ***"
+ROOT=./external
 pushd "$ROOT"
 
 # Build tools requirements (from section 12.1 of https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4407.pdf):
@@ -55,7 +56,7 @@ printf "set(CMAKE_C_COMPILER \"clang\")\nset(CMAKE_CXX_COMPILER \"clang++\")\n" 
 export PATH="$PWD/clang+llvm-$VERSION-$PLATFORM/bin:$PATH"
 
 if [[ `clang --version | head -1 | awk '{print $3}'` != "$VERSION" ]]; then
-  echo "ERROR: Clang version doesn't match."
+  echo "ERROR: Clang version doesn't match. Expected: ${VERSION}, Got: $(clang --version)"
   exit 1
 fi
 
@@ -129,15 +130,15 @@ fi
 export PATH="$PWD/cmake-$VERSION-$PLATFORM/bin:$PATH"
 
 if [[ `cmake --version | head -n1` != "cmake version $VERSION" ]]; then
-  echo "ERROR: CMake version doesn't match."
+  echo "ERROR: CMake version doesn't match. Expected ${VERSION}, Got: $(cmake --version)"
   exit 1
 fi
 
 # Clean after previous build.
-rm -rf boringssl/build
+rm -rf aws_lc/build
 
 # Build BoringSSL.
-cd boringssl
+cd aws_lc
 # Setting -fPIC only affects the compilation of the non-module code in libcrypto.a,
 # because the FIPS module itself is already built with -fPIC.
 mkdir build && cd build && cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=${HOME}/toolchain -DFIPS=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" ..
@@ -153,5 +154,5 @@ fi
 
 # Move compiled libraries to the expected destinations.
 popd
-mv $ROOT/boringssl/build/crypto/libcrypto.a $1
-mv $ROOT/boringssl/build/ssl/libssl.a $2
+mv $ROOT/aws_lc/build/crypto/libcrypto.a $1
+mv $ROOT/aws_lc/build/ssl/libssl.a $2

@@ -117,17 +117,17 @@ if [[ "$ARCH" != "ppc64le" ]]; then
 	curl -sLO https://github.com/Kitware/CMake/releases/download/v"$VERSION"/cmake-"$VERSION"-"$PLATFORM".tar.gz \
 		&& echo "$SHA256" cmake-"$VERSION"-"$PLATFORM".tar.gz | sha256sum --check
 	tar xf cmake-"$VERSION"-"$PLATFORM".tar.gz
+	export PATH="$PWD/cmake-$VERSION-$PLATFORM/bin:$PATH"
 else
 	PLATFORM="linux-ppc64le"
 	echo "Building cmake for ppc64le"
 
-	curl -sL -o cmake-$VERSION-$PLATFORM.tar.gz https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1.tar.gz
+	curl -sL -o cmake-$VERSION-$PLATFORM.tar.gz https://github.com/Kitware/CMake/releases/download/v"$VERSION"/cmake-"$VERSION".tar.gz
 	tar xf cmake-"$VERSION"-"$PLATFORM".tar.gz
 
-	./cmake-"$VERSION"-"$PLATFORM"/bootstrap && make
+	./cmake-"$VERSION"/bootstrap && make
+	export PATH="$PWD/cmake-$VERSION/bin:$PATH"
 fi
-
-export PATH="$PWD/cmake-$VERSION-$PLATFORM/bin:$PATH"
 
 if [[ `cmake --version | head -n1` != "cmake version $VERSION" ]]; then
   echo "ERROR: CMake version doesn't match. Expected ${VERSION}, Got: $(cmake --version)"

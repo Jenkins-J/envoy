@@ -130,7 +130,9 @@ else
 fi
 
 if [[ `cmake --version | head -n1` != "cmake version $VERSION" ]]; then
-  echo "ERROR: CMake version doesn't match. Expected ${VERSION}, Got: $(cmake --version)"
+  echo "PATH: $PATH"
+  echo "PLATFORM: $PLATFORM"
+  echo "ERROR: CMake version doesn't match. Expected: ${VERSION}, Got: $(cmake --version | head -n1)"
   exit 1
 fi
 

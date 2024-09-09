@@ -125,8 +125,10 @@ else
 	curl -sL -o cmake-$VERSION-$PLATFORM.tar.gz https://github.com/Kitware/CMake/releases/download/v"$VERSION"/cmake-"$VERSION".tar.gz
 	tar xf cmake-"$VERSION"-"$PLATFORM".tar.gz
 
-	./cmake-"$VERSION"/bootstrap && make
-	export PATH="$PWD/cmake-$VERSION/bin:$PATH"
+  cd cmake-"$VERSION"
+  ./bootstrap && make
+  export PATH="$PWD/bin:$PATH"
+  cd ..
 fi
 
 if [[ `cmake --version | head -n1` != "cmake version $VERSION" ]]; then

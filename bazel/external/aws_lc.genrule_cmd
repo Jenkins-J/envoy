@@ -139,6 +139,7 @@ if [[ `cmake --version | head -n1` != "cmake version $VERSION" ]]; then
 fi
 
 echo "Cmake installed successfully"
+echo "PWD: $PWD"
 
 # Clean after previous build.
 rm -rf aws_lc/build

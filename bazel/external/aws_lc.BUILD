@@ -5,9 +5,9 @@ cc_library(
     srcs = [
         "crypto/libcrypto.a",
     ],
-    hdrs = glob(["aws-lc/include/openssl/*.h"]),
+    hdrs = glob(["aws_lc/include/openssl/*.h"]),
     defines = ["BORINGSSL_FIPS"],
-    includes = ["aws-lc/include"],
+    includes = ["aws_lc/include"],
     visibility = ["//visibility:public"],
 )
 
@@ -16,15 +16,15 @@ cc_library(
     srcs = [
         "ssl/libssl.a",
     ],
-    hdrs = glob(["aws-lc/include/openssl/*.h"]),
-    includes = ["aws-lc/include"],
+    hdrs = glob(["aws_lc/include/openssl/*.h"]),
+    includes = ["aws_lc/include"],
     visibility = ["//visibility:public"],
     deps = [":crypto"],
 )
 
 genrule(
     name = "build",
-    srcs = glob(["aws-lc/**"]),
+    srcs = glob(["aws_lc/**"]),
     outs = [
         "crypto/libcrypto.a",
         "ssl/libssl.a",

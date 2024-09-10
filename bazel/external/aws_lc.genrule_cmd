@@ -138,17 +138,26 @@ if [[ `cmake --version | head -n1` != "cmake version $VERSION" ]]; then
   exit 1
 fi
 
+echo "Cmake installed successfully"
+
 # Clean after previous build.
 rm -rf aws_lc/build
 
+echo "Removed previous builds of aws_lc"
+
 # Build BoringSSL.
 cd aws_lc
+
+echo "navigated to aws_lc directory"
+
 # Setting -fPIC only affects the compilation of the non-module code in libcrypto.a,
 # because the FIPS module itself is already built with -fPIC.
 mkdir build && cd build && cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=${HOME}/toolchain -DFIPS=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" ..
 ninja
 ninja run_tests
 ./crypto/crypto_test
+
+echo "created build directory and built aws_lc with ninja"
 
 # Verify correctness of the FIPS build.
 if [[ `tool/bssl isfips` != "1" ]]; then
@@ -160,3 +169,5 @@ fi
 popd
 mv $ROOT/aws_lc/build/crypto/libcrypto.a $1
 mv $ROOT/aws_lc/build/ssl/libssl.a $2
+
+echo "Success: moved aws_lc libraries to the correct directory for Envoy to use"

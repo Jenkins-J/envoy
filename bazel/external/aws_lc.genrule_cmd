@@ -61,16 +61,16 @@ if [[ `clang --version | head -1 | awk '{print $3}'` != "$VERSION" ]]; then
 fi
 
 # Go
-VERSION=1.16.5
+VERSION=1.18.1
 if [[ "$ARCH" == "x86_64" ]]; then
   PLATFORM="linux-amd64"
-  SHA256=b12c23023b68de22f74c0524f10b753e7b08b1504cb7e417eccebdd3fae49061
+  SHA256=b3b815f47ababac13810fc6021eb73d65478e0b2db4b09d348eefad9581a2334
 elif [[ "$ARCH" == "ppc64le" ]]; then
 	PLATFORM="linux-ppc64le"
-	SHA256=fad2da6c86ede8448d2d0e66e1776e2f0ae9169714eade29b9ffbbdede7fc6cc
+	SHA256=33db623d1eecf362fe365107c12efc90eff0b9609e0b3345e258388019cb552a
 else
   PLATFORM="linux-arm64"
-  SHA256=d5446b46ef6f36fdffa852f73dfbbe78c1ddf010b99fa4964944b9ae8b4d6799
+  SHA256=56a91851c97fb4697077abbca38860f735c32b38993ff79b088dac46e4735633
 fi
 
 curl -sLO https://dl.google.com/go/go"$VERSION"."$PLATFORM".tar.gz \

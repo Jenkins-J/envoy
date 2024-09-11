@@ -36,16 +36,16 @@ pushd "$ROOT"
 export PATH="$(dirname `which cmake`):/usr/bin:/bin"
 
 # Clang
-VERSION=12.0.0
+VERSION=14.0.0
 if [[ "$ARCH" == "x86_64" ]]; then
   PLATFORM="x86_64-linux-gnu-ubuntu-20.04"
-  SHA256=a9ff205eb0b73ca7c86afc6432eed1c2d49133bd0d49e47b15be59bbf0dd292e
+  SHA256=61582215dafafb7b576ea30cc136be92c877ba1f1c31ddbbd372d6d65622fef5
 elif [[ "$ARCH" == "ppc64le" ]]; then
   PLATFORM="powerpc64le-linux-ubuntu-18.04"
-  SHA256=acf6bd491d60d126254dc867b2c64c9f1077a4b3dabc0381c31fd8e72aacc4f2
+  SHA256=2d504c4920885c86b306358846178bc2232dfac83b47c3b1d05861a8162980e6
 else
   PLATFORM="aarch64-linux-gnu"
-  SHA256=d05f0b04fb248ce1e7a61fcd2087e6be8bc4b06b2cc348792f383abf414dec48
+  SHA256=1792badcd44066c79148ffeb1746058422cc9d838462be07e3cb19a4b724a1ee
 fi
 
 curl -sLO https://github.com/llvm/llvm-project/releases/download/llvmorg-"$VERSION"/clang+llvm-"$VERSION"-"$PLATFORM".tar.xz

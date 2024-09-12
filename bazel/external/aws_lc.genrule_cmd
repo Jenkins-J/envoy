@@ -104,14 +104,14 @@ fi
 cd ..
 
 # CMake
-VERSION=3.20.1
+VERSION=3.22.1
 if [[ "$ARCH" != "ppc64le" ]]; then
 	if [[ "$ARCH" == "x86_64" ]]; then
 		PLATFORM="linux-x86_64"
-		SHA256=b8c141bd7a6d335600ab0a8a35e75af79f95b837f736456b5532f4d717f20a09
+		SHA256=73565c72355c6652e9db149249af36bcab44d9d478c5546fd926e69ad6b43640
 	else
 		PLATFORM="linux-aarch64"
-		SHA256=5ad1f8139498a1956df369c401658ec787f63c8cb4e9759f2edaa51626a86512
+		SHA256=601443375aa1a48a1a076bda7e3cca73af88400463e166fffc3e1da3ce03540b
 	fi
 
 	curl -sLO https://github.com/Kitware/CMake/releases/download/v"$VERSION"/cmake-"$VERSION"-"$PLATFORM".tar.gz \

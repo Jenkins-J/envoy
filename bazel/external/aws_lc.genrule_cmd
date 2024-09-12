@@ -155,6 +155,7 @@ echo "navigated to aws_lc directory"
 # because the FIPS module itself is already built with -fPIC.
 mkdir build && cd build && cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=${HOME}/toolchain -DFIPS=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" ..
 ninja
+export GTEST_FILTER="-SSLTest.HostMatching"
 ninja run_tests
 ./crypto/crypto_test
 

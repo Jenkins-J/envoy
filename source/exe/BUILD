@@ -46,12 +46,12 @@ envoy_cc_library(
         "//source/server:options_base",
         "//source/server:server_base_lib",
     ] + select({
-        "//bazel:enable_http3_on_windows_x86_64": envoy_all_extensions(WINDOWS_SKIP_TARGETS),
-        "//bazel:enable_http3_on_linux_ppc": envoy_all_extensions(PPC_SKIP_TARGETS),
-        "//bazel:disable_http3_on_windows_x86_64": envoy_all_extensions(NO_HTTP3_SKIP_TARGETS + WINDOWS_SKIP_TARGETS),
-        "//bazel:disable_http3_on_linux_ppc": envoy_all_extensions(NO_HTTP3_SKIP_TARGETS + PPC_SKIP_TARGETS),
-        "//bazel:disable_http3": envoy_all_extensions(NO_HTTP3_SKIP_TARGETS),
-        "//conditions:default": envoy_all_extensions(),
+        # "//bazel:enable_http3_on_windows_x86_64": envoy_all_extensions(WINDOWS_SKIP_TARGETS),
+        # "//bazel:enable_http3_on_linux_ppc": envoy_all_extensions(PPC_SKIP_TARGETS),
+        # "//bazel:disable_http3_on_windows_x86_64": envoy_all_extensions(NO_HTTP3_SKIP_TARGETS + WINDOWS_SKIP_TARGETS),
+        # "//bazel:disable_http3_on_linux_ppc": envoy_all_extensions(NO_HTTP3_SKIP_TARGETS + PPC_SKIP_TARGETS),
+        # "//bazel:disable_http3": envoy_all_extensions(NO_HTTP3_SKIP_TARGETS),
+        # "//conditions:default": envoy_all_extensions(),
         "//bazel:boringssl_fips_ppc": envoy_all_extensions(PPC_SKIP_TARGETS + NO_HTTP3_SKIP_TARGETS),
     }),
 )

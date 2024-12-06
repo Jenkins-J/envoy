@@ -10,6 +10,7 @@ PROTOBUF_VERSION = "29.2"
 PROTOC_VERSIONS = dict(
     linux_aarch_64 = "29cf483e2fb21827e5fac4964e35eae472a238e28c762f02fb17dcd93ff8b89f",
     linux_x86_64 = "52e9e7ece55c7e30e7e8bbd254b4b21b408a5309bca826763c7124b696a132e9",
+    linux_ppcle_64 = "ba20895a1b7f34a6ffaa5e51c341316c4aebc4c1443778634084e99f6eb67ff9",
     osx_aarch_64 = "0e153a38d6da19594c980e7f7cd3ea0ddd52c9da1068c03c0d8533369fbfeb20",
     osx_x86_64 = "ba2bd983b5f06ec38d663b602884a597dea3990a43803d7e153ed8f7c54269e1",
     win64 = "59ea61efb24b9d8a214171e2ca3fec55c3f1517eff067656c875d8a1cd06ce4f",
@@ -1202,10 +1203,10 @@ REPOSITORY_LOCATIONS_SPEC = dict(
         project_url = "https://v8.dev",
         # NOTE: Update together with com_googlesource_chromium_base_trace_event_common.
         # Patch contains workaround for https://github.com/bazelbuild/rules_python/issues/1221
-        version = "10.7.193.13",
+        version = "ppc64le",
         # Static snapshot created using https://storage.googleapis.com/envoyproxy-wee8/wee8-fetch-deps.sh.
-        sha256 = "2170df76ce5d7ecd7fb8d131370d210152f200273cba126f06d8b88fb53c9fbc",
-        urls = ["https://storage.googleapis.com/envoyproxy-wee8/v8-{version}.tar.gz"],
+        sha256 = "5aa59494cdf78e05e71794d77b7b0ce6254118b94655f9c7ba4a7da4f6df6f4d",
+        urls = ["https://github.com/Jenkins-J/v8/releases/download/ppc64le/v8-{version}.tar.gz"],
         use_category = ["dataplane_ext"],
         extensions = ["envoy.wasm.runtime.v8"],
         release_date = "2022-10-12",

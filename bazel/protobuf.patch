@@ -1,8 +1,8 @@
 diff --git a/BUILD.bazel b/BUILD.bazel
-index 42175b5ed..8b313e0f6 100644
+index f3ba2c66c..f17f89603 100644
 --- a/BUILD.bazel
 +++ b/BUILD.bazel
-@@ -222,14 +222,79 @@ alias(
+@@ -222,14 +222,87 @@ alias(
      visibility = ["//visibility:public"],
  )
  
@@ -31,6 +31,14 @@ index 42175b5ed..8b313e0f6 100644
 +    constraint_values = [
 +        "@platforms//os:linux",
 +        "@platforms//cpu:x86_64",
++    ],
++)
++
++config_setting(
++    name = "linux-ppcle_64",
++    constraint_values = [
++	"@platforms//os:linux",
++	"@platforms//cpu:ppc64le",
 +    ],
 +)
 +
@@ -64,10 +72,10 @@ index 42175b5ed..8b313e0f6 100644
 +    actual = select({
 +        ":linux-aarch_64": "@com_google_protobuf_protoc_linux_aarch_64//:protoc",
 +        ":linux-x86_64": "@com_google_protobuf_protoc_linux_x86_64//:protoc",
++        ":linux-ppcle_64": "@com_google_protobuf_protoc_linux_ppcle_64//:protoc",
 +        ":osx-aarch_64": "@com_google_protobuf_protoc_osx_aarch_64//:protoc",
 +        ":osx-x86_64": "@com_google_protobuf_protoc_osx_x86_64//:protoc",
 +        ":win64": "@com_google_protobuf_protoc_win64//:protoc",
-+        "//conditions:default": ":compiled_protoc",
 +    }),
 +    visibility = ["//visibility:public"],
 +)

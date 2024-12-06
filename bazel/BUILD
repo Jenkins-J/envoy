@@ -557,7 +557,7 @@ selects.config_setting_group(
     name = "boringssl_fips_ppc",
     match_all = [
         ":boringssl_fips",
-        "@platforms//cpu:ppc",
+        "@platforms//cpu:ppc64le",
     ],
 )
 

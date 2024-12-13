@@ -1,16 +1,3 @@
-diff --git a/MODULE.bazel b/MODULE.bazel
-index 6fb41717..d85cc251 100644
---- a/MODULE.bazel
-+++ b/MODULE.bazel
-@@ -15,7 +15,7 @@ bazel_dep(
- )
- bazel_dep(
-     name = "platforms",
--    version = "0.0.8",
-+    version = "ppc64le",
- )
- bazel_dep(
-     name = "rules_cc",
 diff --git a/rust/platform/triple.bzl b/rust/platform/triple.bzl
 index ba27cf58..ee8a9bce 100644
 --- a/rust/platform/triple.bzl

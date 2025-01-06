@@ -24,7 +24,7 @@ cc_library(
 
 genrule(
     name = "build",
-    srcs = glob(["aws_lc/**"]),
+    srcs = glob(["**"]),
     outs = [
         "crypto/libcrypto.a",
         "ssl/libssl.a",

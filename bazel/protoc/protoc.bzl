@@ -8,7 +8,7 @@ which don't allow files."""
         name = name,
         executable = True,
         srcs = srcs,
-        outs = [executable],
+        outs = executable,
         cmd_bash = "cp $< $@ && chmod +x $@",
         cmd_bat = "copy $< $@",
         **kwargs

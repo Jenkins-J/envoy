@@ -6,7 +6,10 @@ protoc_binary(
         ":windows": ["bin/protoc.exe"],
         "//conditions:default": ["bin/protoc"],
     }),
-    executable = "protoc.exe",
+    executable = select({
+        ":windows": ["protoc.exe"],
+        "//conditions:default": ["protoc"],
+    }),
     visibility = ["//visibility:public"],
 )
 

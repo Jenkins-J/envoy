@@ -116,7 +116,7 @@ absl::Status SPIFFEValidator::addClientValidationContext(SSL_CTX* ctx, bool) {
     X509_NAME* name = X509_get_subject_name(ca.get());
 
     // Check for duplicates.
-    if (sk_X509_NAME_find(list.get(), nullptr, name)) {
+    if (sk_X509_NAME_find_awslc(list.get(), nullptr, name)) {
       continue;
     }
 

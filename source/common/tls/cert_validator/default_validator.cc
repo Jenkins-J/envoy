@@ -534,7 +534,7 @@ absl::Status DefaultCertValidator::addClientValidationContext(SSL_CTX* ctx,
           "Failed to load trusted client CA certificates from ", config_->caCertPath()));
     }
     // Check for duplicates.
-    if (sk_X509_NAME_find(list.get(), nullptr, name)) {
+    if (sk_X509_NAME_find_awslc(list.get(), nullptr, name)) {
       continue;
     }
     bssl::UniquePtr<X509_NAME> name_dup(X509_NAME_dup(name));

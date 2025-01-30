@@ -33,7 +33,9 @@
 
 namespace Envoy {
 #ifndef OPENSSL_IS_BORINGSSL
-#error Envoy requires BoringSSL
+#ifndef OPENSSL_IS_AWSLC
+#error Envoy requires BoringSSL or AWSLC
+#endif
 #endif
 
 namespace Ssl {

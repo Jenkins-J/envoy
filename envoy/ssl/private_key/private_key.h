@@ -24,6 +24,10 @@ namespace Ssl {
 using BoringSslPrivateKeyMethodSharedPtr = std::shared_ptr<SSL_PRIVATE_KEY_METHOD>;
 #endif
 
+#ifdef OPENSSL_IS_AWSLC
+using BoringSslPrivateKeyMethodSharedPtr = std::shared_ptr<SSL_PRIVATE_KEY_METHOD>;
+#endif
+
 class PrivateKeyMethodProvider {
 public:
   virtual ~PrivateKeyMethodProvider() = default;
@@ -58,6 +62,15 @@ public:
   virtual bool isAvailable() PURE;
 
 #ifdef OPENSSL_IS_BORINGSSL
+  /**
+   * Get the private key methods from the provider.
+   * @return the private key methods associated with this provider and
+   * configuration.
+   */
+  virtual BoringSslPrivateKeyMethodSharedPtr getBoringSslPrivateKeyMethod() PURE;
+#endif
+
+#ifdef OPENSSL_IS_AWSLC
   /**
    * Get the private key methods from the provider.
    * @return the private key methods associated with this provider and

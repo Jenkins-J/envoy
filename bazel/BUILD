@@ -551,7 +551,7 @@ config_setting(
 # Alias pointing to the selected version of BoringSSL:
 # - BoringSSL FIPS from @boringssl_fips//:ssl,
 # - non-FIPS BoringSSL from @boringssl//:ssl.
-# - new alias for aws-lc?
+# - aws-lc from @aws_lc//:ssl
 alias(
     name = "boringssl",
     actual = select({

@@ -13,7 +13,6 @@ ARCH=`uname -m`
 # This works only on Linux-x86_64 and Linux-aarch64.
 if [[ "$OS" != "Linux" || ("$ARCH" != "x86_64" && "$ARCH" != "aarch64") ]]; then
   echo "ERROR: BoringSSL FIPS is currently supported only on Linux-x86_64 and Linux-aarch64."
-  echo "ARCH is $ARCH"
   exit 1
 fi
 

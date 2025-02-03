@@ -1,8 +1,8 @@
 diff --git a/BUILD.bazel b/BUILD.bazel
-index f3ba2c66c..f17f89603 100644
+index 32b26cbdc..a5e7a554c 100644
 --- a/BUILD.bazel
 +++ b/BUILD.bazel
-@@ -222,14 +222,87 @@ alias(
+@@ -229,14 +229,88 @@ alias(
      visibility = ["//visibility:public"],
  )
  
@@ -76,6 +76,7 @@ index f3ba2c66c..f17f89603 100644
 +        ":osx-aarch_64": "@com_google_protobuf_protoc_osx_aarch_64//:protoc",
 +        ":osx-x86_64": "@com_google_protobuf_protoc_osx_x86_64//:protoc",
 +        ":win64": "@com_google_protobuf_protoc_win64//:protoc",
++        "//conditions:default": ":compiled_protoc",
 +    }),
 +    visibility = ["//visibility:public"],
 +)

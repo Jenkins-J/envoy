@@ -631,7 +631,10 @@ def _com_google_protobuf():
     external_http_archive(
         name = "rules_java",
         patch_args = ["-p1"],
-        patches = ["@envoy//bazel:rules_java.patch"],
+        patches = [
+            "@envoy//bazel:rules_java.patch",
+            "@envoy//bazel:rules_java_ppc64le.patch",
+        ],
     )
 
     for platform in PROTOC_VERSIONS:

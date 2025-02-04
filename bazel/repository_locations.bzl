@@ -1205,10 +1205,10 @@ REPOSITORY_LOCATIONS_SPEC = dict(
         project_url = "https://v8.dev",
         # NOTE: Update together with com_googlesource_chromium_base_trace_event_common.
         # Patch contains workaround for https://github.com/bazelbuild/rules_python/issues/1221
-        version = "ppc64le",
+        version = "10.7.193.13",
         # Static snapshot created using https://storage.googleapis.com/envoyproxy-wee8/wee8-fetch-deps.sh.
-        sha256 = "5aa59494cdf78e05e71794d77b7b0ce6254118b94655f9c7ba4a7da4f6df6f4d",
-        urls = ["https://github.com/Jenkins-J/v8/releases/download/ppc64le/v8-{version}.tar.gz"],
+        sha256 = "2170df76ce5d7ecd7fb8d131370d210152f200273cba126f06d8b88fb53c9fbc",
+        urls = ["https://storage.googleapis.com/envoyproxy-wee8/v8-{version}.tar.gz"],
         use_category = ["dataplane_ext"],
         extensions = ["envoy.wasm.runtime.v8"],
         release_date = "2022-10-12",

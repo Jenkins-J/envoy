@@ -7,7 +7,7 @@ index 225ff331..e4d5ba86 100644
  bazel_dep(
      name = "platforms",
 -    version = "0.0.10",
-+    version = "ppc64le",
++    version = "0.0.11",
  )
  bazel_dep(
      name = "rules_cc",

@@ -310,6 +310,14 @@ selects.config_setting_group(
 )
 
 selects.config_setting_group(
+    name = "disable_http3_on_linux_ppc64le",
+    match_all = [
+        ":disable_http3",
+        ":linux_ppc64le",
+    ],
+)
+
+selects.config_setting_group(
     name = "disable_http3_on_windows_x86_64",
     match_all = [
         ":disable_http3",
@@ -348,6 +356,14 @@ selects.config_setting_group(
     match_all = [
         ":enable_http3",
         ":linux_ppc",
+    ],
+)
+
+selects.config_setting_group(
+    name = "enable_http3_on_linux_ppc64le",
+    match_all = [
+        ":enable_http3",
+        ":linux_ppc64le",
     ],
 )
 
@@ -595,6 +611,14 @@ config_setting(
 )
 
 config_setting(
+    name = "linux_ppc64le",
+    constraint_values = [
+        "@platforms//cpu:ppc64le",
+        "@platforms//os:linux",
+    ],
+)
+
+config_setting(
     name = "linux_s390x",
     constraint_values = [
         "@platforms//cpu:s390x",
@@ -816,6 +840,7 @@ selects.config_setting_group(
         ":linux_aarch64",
         ":linux_mips64",
         ":linux_ppc",
+        ":linux_ppc64le",
         ":linux_s390x",
     ],
 )

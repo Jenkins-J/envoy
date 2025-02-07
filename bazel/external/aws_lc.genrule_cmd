@@ -153,7 +153,7 @@ echo "navigated to aws_lc directory"
 
 # Setting -fPIC only affects the compilation of the non-module code in libcrypto.a,
 # because the FIPS module itself is already built with -fPIC.
-mkdir build && cd build && cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=${HOME}/toolchain -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" ..
+mkdir build && cd build && cmake -GNinja -DCMAKE_TOOLCHAIN_FILE=${HOME}/toolchain -DFIPS=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" ..
 ninja
 export GTEST_FILTER="-SSLTest.HostMatching"
 #ninja run_tests
@@ -161,11 +161,11 @@ export GTEST_FILTER="-SSLTest.HostMatching"
 
 echo "created build directory and built aws_lc with ninja"
 
-# Verify correctness of the FIPS build.
-# if [[ `tool/bssl isfips` != "1" ]]; then
-#   echo "ERROR: BoringSSL tool didn't report FIPS build."
-#   exit 1
-# fi
+Verify correctness of the FIPS build.
+if [[ `tool/bssl isfips` != "1" ]]; then
+  echo "ERROR: BoringSSL tool didn't report FIPS build."
+  exit 1
+fi
 
 # Move compiled libraries to the expected destinations.
 popd

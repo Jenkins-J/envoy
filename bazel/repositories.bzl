@@ -633,7 +633,6 @@ def _com_google_protobuf():
         patch_args = ["-p1"],
         patches = [
             "@envoy//bazel:rules_java.patch",
-            "@envoy//bazel:rules_java_ppc64le.patch",
         ],
     )
 

@@ -13,16 +13,13 @@ ARCH=`uname -m`
 # This works only on Linux-x86_64, Linux-ppc64le, and Linux-aarch64.
 
 if [[ "$OS" != "Linux" || ("$ARCH" != "x86_64" && "$ARCH" != "aarch64" && "$ARCH" != "ppc64le") ]]; then
-  echo "ERROR: BoringSSL FIPS is currently supported only on Linux-x86_64, Linux-ppc64le, and Linux-aarch64."
-  echo "*** This is the aws_lc genrule command ***"
-  echo "ARCH is $ARCH"
+  echo "ERROR: AWS-LC FIPS is currently supported only on Linux-x86_64, Linux-ppc64le, and Linux-aarch64."
   exit 1
 fi
 
 
 # Bazel magic.
 # ROOT=$(dirname $(rootpath boringssl/BUILDING.md))/..
-echo "*** $PWD ***"
 ROOT=./external
 pushd "$ROOT"
 
@@ -144,12 +141,8 @@ echo "PWD: $PWD"
 # Clean after previous build.
 rm -rf aws_lc/build
 
-echo "Removed previous builds of aws_lc"
-
 # Build BoringSSL.
 cd aws_lc
-
-echo "navigated to aws_lc directory"
 
 # Setting -fPIC only affects the compilation of the non-module code in libcrypto.a,
 # because the FIPS module itself is already built with -fPIC.
@@ -171,5 +164,3 @@ fi
 popd
 mv $ROOT/aws_lc/build/crypto/libcrypto.a $1
 mv $ROOT/aws_lc/build/ssl/libssl.a $2
-
-echo "Success: moved aws_lc libraries to the correct directory for Envoy to use"

@@ -318,6 +318,14 @@ selects.config_setting_group(
 )
 
 selects.config_setting_group(
+    name = "disable_http3_on_not_x86_ppc",
+    match_all = [
+        ":disable_http3",
+        ":not_x86_ppc",
+    ],
+)
+
+selects.config_setting_group(
     name = "disable_http3_on_windows_x86_64",
     match_all = [
         ":disable_http3",
@@ -522,7 +530,7 @@ selects.config_setting_group(
     name = "boringssl_fips_ppc",
     match_all = [
         ":boringssl_fips",
-        "@platforms//cpu:ppc64le",
+        ":linux_ppc64le",
     ],
 )
 
@@ -824,6 +832,22 @@ selects.config_setting_group(
         ":ios_x86_64",
         ":linux_x86_64",
         ":windows_x86_64",
+    ],
+)
+
+selects.config_setting_group(
+    name = "not_x86_ppc",
+    match_any = [
+        ":darwin_arm64",
+        ":ios_arm64",
+        ":ios_arm64e",
+        ":ios_armv7",
+        ":ios_armv7s",
+        ":ios_i386",
+        ":ios_sim_arm64",
+        ":linux_aarch64",
+        ":linux_mips64",
+        ":linux_s390x",
     ],
 )
 

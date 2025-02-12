@@ -1,0 +1,13 @@
+diff --git go/private/platforms.bzl go/private/platforms.bzl
+index 0a1e343f..7824a584 100644
+--- go/private/platforms.bzl
++++ go/private/platforms.bzl
+@@ -32,7 +32,7 @@ BAZEL_GOARCH_CONSTRAINTS = {
+     "arm": "@platforms//cpu:armv7",
+     "arm64": "@platforms//cpu:aarch64",
+     "ppc64": "@platforms//cpu:ppc",
+-    "ppc64le": "@platforms//cpu:ppc64le",
++    "ppc64le": "@platforms//cpu:ppc",
+     "s390x": "@platforms//cpu:s390x",
+ }
+ 

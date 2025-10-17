@@ -1,8 +1,8 @@
 diff --git a/bazel/config/BUILD.bazel b/bazel/config/BUILD.bazel
-index 448260d..fe50366 100644
+index c81f2782..444b5adb 100644
 --- a/bazel/config/BUILD.bazel
 +++ b/bazel/config/BUILD.bazel
-@@ -61,7 +61,7 @@ config_setting(
+@@ -76,7 +76,7 @@ config_setting(
  
  config_setting(
      name = "platform_cpu_ppc64le",
@@ -11,3 +11,16 @@ index 448260d..fe50366 100644
  )
  
  v8_target_cpu(
+diff --git a/bazel/defs.bzl b/bazel/defs.bzl
+index 0539ea17..515ab7da 100644
+--- a/bazel/defs.bzl
++++ b/bazel/defs.bzl
+@@ -437,7 +437,7 @@ def _v8_target_cpu_transition_impl(settings,
+         "armeabi-v7a": "arm32",
+         "s390x": "s390x",
+         "riscv64": "riscv64",
+-        "ppc64": "ppc64le",
++        "ppc": "ppc64le",
+     }
+     v8_target_cpu = mapping[settings["//command_line_option:cpu"]]
+     return {"@v8//bazel/config:v8_target_cpu": v8_target_cpu}

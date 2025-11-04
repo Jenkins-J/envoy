@@ -25,14 +25,14 @@ index 0539ea17..515ab7da 100644
      v8_target_cpu = mapping[settings["//command_line_option:cpu"]]
      return {"@v8//bazel/config:v8_target_cpu": v8_target_cpu}
 diff --git a/third_party/highway/BUILD.gn b/third_party/highway/BUILD.gn
-index 16bc7fec..3a07a4de 100644
+index 16bc7fec..3c90f10f 100644
 --- a/third_party/highway/BUILD.gn
 +++ b/third_party/highway/BUILD.gn
 @@ -6,6 +6,7 @@
  config("libhwy_external_config") {
    include_dirs = [ "src" ]
    defines = []
-+  print(f"target_cpu: {target_cpu}")
++  fail(f"target_cpu: {target_cpu}")
    if (target_cpu == "x86") {
      # Highway automatically disables AVX2 and AVX3 targets when compiling in
      # 32-bit mode due to bugs in the generated code. However, when doing so it

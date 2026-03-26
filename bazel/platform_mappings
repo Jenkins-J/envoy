@@ -11,6 +11,10 @@ flags:
   --cpu=x86_64
     @envoy//bazel:android_x86_64
 
+  --cpu=ppc64le
+    @platforms//cpu:ppc64le
+    @platforms//os:linux
+
   --cpu=darwin_x86_64
   --apple_platform_type=macos
     @envoy//bazel:macos_x86_64
